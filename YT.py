@@ -34,7 +34,6 @@ for channel in channels:
         rq = yt.channels().list(part='contentDetails', id=channelId)
     response = rq.execute()
     uploadsId = response['items'][0]['contentDetails']['relatedPlaylists']['uploads']
-    print(uploadsId)
     rq = yt.playlistItems().list(part='contentDetails', playlistId=uploadsId)
     response = rq.execute()
     if channel not in logged_channels:
