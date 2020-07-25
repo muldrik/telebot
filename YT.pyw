@@ -5,11 +5,11 @@ from telegramHandler import post
 
 yt = build('youtube', 'v3', developerKey=api_key)
 
-f = open('C:/Users/muldr/PycharmProjects/TelegramBotV1/channelauto.txt', 'r')
+f = open('channelauto.txt', 'r')
 logged_channels = f.read()
 f.close()
 
-f = open('C:/Users/muldr/PycharmProjects/TelegramBotV1/posted.txt', 'r')
+f = open('posted.txt', 'r')
 ids = f.read()
 f.close()
 new_ids = []
@@ -21,12 +21,12 @@ for channel in channels:
     rq = yt.playlistItems().list(part='contentDetails', playlistId=uploadsId)
     response = rq.execute()
     if channel[1] not in logged_channels:
-        f = open('C:/Users/muldr/PycharmProjects/TelegramBotV1/posted.txt', 'a')
+        f = open('posted.txt', 'a')
         for vid in response['items']:
             new_id = vid['contentDetails']['videoId']
             f.write(new_id+'\n')
         f.close()
-        f = open('C:/Users/muldr/PycharmProjects/TelegramBotV1/channelauto.txt', 'a')
+        f = open('channelauto.txt', 'a')
         f.write(channel[1]+'\n')
         f.close()
     else:
@@ -37,7 +37,7 @@ for channel in channels:
 
 
 # Update list of ids
-f = open('C:/Users/muldr/PycharmProjects/TelegramBotV1/posted.txt', 'a')
+f = open('posted.txt', 'a')
 for new_id in new_ids:
     f.write(new_id)
 f.close()
